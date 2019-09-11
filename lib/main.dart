@@ -10,12 +10,27 @@ class QuizzPage extends StatefulWidget {
 }
 
 class _QuizzPageState extends State<QuizzPage> {
-  @override
+  List<Widget> scoreKeeper = [
+    SizedBox(
+      width: 8.0,
+    )
+  ];
+  int questionNumber = 0;
+  List <String> questions =[
+    'javascript est un langage de communication',
+    'php est un language frontend',
+    'laravel est un framework backend'
+  ];
+
+  List<bool> answer = [
+    false,false,true
+  ];
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
         backgroundColor: Colors.grey.shade900,
         appBar: AppBar(
+          centerTitle: true,
           title: Text('Quizz App'),
         ),
         body: Padding(
@@ -26,13 +41,14 @@ class _QuizzPageState extends State<QuizzPage> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Expanded(
-                  flex: 5,
+                    flex: 5,
                     child: Center(
-                  child: Text(
-                    'the posed question it is there ,give me response',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                )),
+                      child: Text(
+                        questions[questionNumber],
+                        textAlign: TextAlign.center,
+                        style: TextStyle(color: Colors.white, fontSize: 20.0),
+                      ),
+                    )),
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -42,7 +58,20 @@ class _QuizzPageState extends State<QuizzPage> {
                         'TRUE',
                         style: TextStyle(color: Colors.white),
                       ),
-                      onPressed: () => {},
+                      onPressed: () {
+                        setState(() {
+                           true == answer[questionNumber]
+                          ? scoreKeeper.add(Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          ))
+                          : scoreKeeper.add(Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ));
+
+                        });
+                      },
                     ),
                   ),
                 ),
@@ -57,10 +86,25 @@ class _QuizzPageState extends State<QuizzPage> {
                           color: Colors.white,
                         ),
                       ),
-                      onPressed: () => {},
+                      onPressed: () {
+                        setState(() {
+                           false == answer[questionNumber]
+                          ? scoreKeeper.add(Icon(
+                            Icons.check,
+                            color: Colors.green,
+                          ))
+                          : scoreKeeper.add(Icon(
+                            Icons.close,
+                            color: Colors.red,
+                          ));
+                        });
+                      },
                     ),
                   ),
                 ),
+                Row(
+                  children: scoreKeeper,
+                )
               ],
             ),
           ),
