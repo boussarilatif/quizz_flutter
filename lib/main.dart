@@ -60,6 +60,7 @@ class _QuizzPageState extends State<QuizzPage> {
                       ),
                       onPressed: () {
                         setState(() {
+                          
                            true == answer[questionNumber]
                           ? scoreKeeper.add(Icon(
                             Icons.check,
@@ -69,7 +70,8 @@ class _QuizzPageState extends State<QuizzPage> {
                             Icons.close,
                             color: Colors.red,
                           ));
-
+                          questionNumber == questions.length - 1 ? questionNumber =0 : questionNumber++;
+                          
                         });
                       },
                     ),
@@ -97,6 +99,8 @@ class _QuizzPageState extends State<QuizzPage> {
                             Icons.close,
                             color: Colors.red,
                           ));
+                          questionNumber == questions.length - 1 ? questionNumber =0 : questionNumber++;
+                          
                         });
                       },
                     ),
